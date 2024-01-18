@@ -1,0 +1,56 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+  functions = "functions/"
+
+[dev]
+  targetPort = 8080
+  autoLaunch = false
+  command = "vite --host localhost --port 8080"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 200
+
+[[headers]]
+  for = "/worker.js"
+  [headers.values]
+    cache-control = "max-age=0,no-cache,no-store,must-revalidate"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Credentials = "true"
+
+[functions."autopost-background"]
+  schedule = "*/15 * * * *"
+  included_files=["src/emails/*.liquid"]
+
+[functions."achievements-background"]
+  schedule = "0 1 * * *"
+  included_files=["src/emails/*.liquid"]
+
+[functions."autopost-notify"]
+  included_files=["src/emails/*.liquid"]
+
+[functions."cron"]
+  included_files=["src/emails/*.liquid"]
+
+[functions."submission-created"]
+  included_files=["src/emails/*.liquid"]
+
+[functions."approve"]
+  included_files=["src/emails/*.liquid"]
+
+[functions."profile"]
+  included_files=["src/emails/*.liquid"]
+
+[[plugins]]
+  package = 'netlify-plugin-contextual-env'
