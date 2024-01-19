@@ -80,6 +80,10 @@ export const useBikeTagAdminStore = defineStore(BikeTagDefaults.store, {
       const gamesStore = useBikeTagGamesStore()
       return gamesStore.getGames
     },
+    getAmbassador: (state) => (ambassadorNameOrEmail: string) => {
+      const ambassadorsStore = useBikeTagAmbassadorsStore()
+      return ambassadorsStore.getAmbassador(ambassadorNameOrEmail)
+    },
     getAmbassadors: (state) => {
       const ambassadorsStore = useBikeTagAmbassadorsStore()
       return ambassadorsStore.getAmbassadors
@@ -88,9 +92,9 @@ export const useBikeTagAdminStore = defineStore(BikeTagDefaults.store, {
       const ambassadorsStore = useBikeTagAmbassadorsStore()
       return ambassadorsStore.gamesAmbassadors(gameName)
     },
-    ambasadorsGames: (state) => (ambassadorName: string) => {
+    ambassadorsGames: (state) => (ambassadorName: string) => {
       const ambassadorsStore = useBikeTagAmbassadorsStore()
-      return ambassadorsStore.ambasadorsGames(ambassadorName)
+      return ambassadorsStore.ambassadorsGames(ambassadorName)
     },
   },
 })

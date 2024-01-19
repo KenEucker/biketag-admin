@@ -25,16 +25,19 @@ export const useBikeTagAmbassadorsStore = defineStore(`${BikeTagDefaults.store}:
   },
 
   getters: {
-    ambasadorsGames: (state) => (ambassador: string) => {
+    ambassadorsGames: (state) => (ambassador: string) => {
       const gamesStore = useBikeTagGamesStore()
       return gamesStore.getGames
-        .filter((game: any) => game.ambassadors.includes(ambassador))
+        .filter((game: any) => game.ambassadors.find(ambassador))
         .map((g) => g.name)
     },
     gamesAmbassadors: (state) => (gameName: string) => {
       const gamesStore = useBikeTagGamesStore()
       const game = gamesStore.getGame(gameName)
       return game?.ambassadors ?? []
+    },
+    getAmbassador: (state) => (ambassador: string) => {
+      return state.ambassadors.find((a) => a.name === ambassador || a.email === ambassador)
     },
     getAmbassadors: (state) => {
       return state.ambassadors
