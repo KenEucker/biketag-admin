@@ -28,7 +28,7 @@ export const useBikeTagAmbassadorsStore = defineStore(`${BikeTagDefaults.store}:
     ambassadorsGames: (state) => (ambassador: string) => {
       const gamesStore = useBikeTagGamesStore()
       return gamesStore.getGames
-        .filter((game: any) => game.ambassadors.find(ambassador))
+        .filter((game: any) => game.ambassadors.find((a: Ambassador) => a.name === ambassador))
         .map((g) => g.name)
     },
     gamesAmbassadors: (state) => (gameName: string) => {
