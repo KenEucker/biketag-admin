@@ -1,14 +1,10 @@
-import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import { defineConfig } from 'vite'
 import envCompatible from 'vite-plugin-env-compatible'
 import EnvironmentPlugin from 'vite-plugin-environment'
-import { createHtmlPlugin } from 'vite-plugin-html'
-import { VitePWA } from 'vite-plugin-pwa'
-import { BikeTagDefaults, BikeTagEnv } from './src/common/constants'
+import { BikeTagEnv } from './src/common/constants'
 
-const host = process.env.HOST ?? BikeTagDefaults.host
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
@@ -26,11 +22,7 @@ export default defineConfig({
       css: { charset: false },
     },
   },
-  plugins: [
-    vue(),
-    EnvironmentPlugin(BikeTagEnv),
-    envCompatible(),
-  ],
+  plugins: [vue(), EnvironmentPlugin(BikeTagEnv), envCompatible()],
   build: {
     sourcemap: true,
     rollupOptions: {
