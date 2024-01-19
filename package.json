@@ -97,7 +97,7 @@
     "vuepress": "^2.0.0-rc.0"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "lint-staged": {
     "*.ts": [
