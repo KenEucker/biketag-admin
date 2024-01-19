@@ -1,7 +1,7 @@
 import { BikeTagClient } from 'biketag'
-import { BikeTagAmbassadorsStoreState, BikeTagDefaults, Ambassador } from '../common'
-import { useBikeTagGamesStore } from './games'
 import { defineStore } from 'pinia'
+import { Ambassador, BikeTagAmbassadorsStoreState, BikeTagDefaults } from '../common'
+import { useBikeTagGamesStore } from './games'
 
 export const useBikeTagAmbassadorsStore = defineStore(`${BikeTagDefaults.store}::ambassadors`, {
   state: (): BikeTagAmbassadorsStoreState => ({

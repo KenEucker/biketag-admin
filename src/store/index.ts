@@ -2,8 +2,8 @@ import BikeTagClient from 'biketag'
 import { Achievement, Game, Player, Tag } from 'biketag/lib/common/schema'
 import { defineStore } from 'pinia'
 import {
-  BikeTagDefaults,
   BikeTagAdminStoreState,
+  BikeTagDefaults,
   debug,
   getApiUrl,
   getBikeTagAdminOpts,
@@ -87,6 +87,10 @@ export const useBikeTagAdminStore = defineStore(BikeTagDefaults.store, {
     gamesAmbassadors: (state) => (gameName: string) => {
       const ambassadorsStore = useBikeTagAmbassadorsStore()
       return ambassadorsStore.gamesAmbassadors(gameName)
+    },
+    ambasadorsGames: (state) => (ambassadorName: string) => {
+      const ambassadorsStore = useBikeTagAmbassadorsStore()
+      return ambassadorsStore.ambasadorsGames(ambassadorName)
     },
   },
 })
