@@ -110,3 +110,6 @@ google-service-key.json
 
 #TurboRepo
 .turbo
+
+#VuePress
+.vuepress
