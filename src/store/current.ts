@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { BikeTagClient } from 'biketag'
-import { Game } from 'biketag/lib/common/schema'
+import { Game } from 'biketag/dist/common/schema'
 import request from 'request'
 import {
   HttpStatusCode,

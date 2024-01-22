@@ -1,6 +1,6 @@
-import { Tag, Game } from 'biketag/lib/common/schema'
+import { Game, Tag } from 'biketag/dist/common/schema'
 
-export type { Tag, Game }
+export type { Game, Tag }
 
 export type BackgroundProcessResults = {
   results: any[]

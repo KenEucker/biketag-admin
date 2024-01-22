@@ -1,6 +1,6 @@
 import { BikeTagClient } from 'biketag'
-import { getQueuePayload } from 'biketag/lib/common/payloads'
-import { Game } from 'biketag/lib/common/schema'
+import { getQueuePayload } from 'biketag/dist/common/payloads'
+import { Game } from 'biketag/dist/common/schema'
 import request from 'request'
 import { getBikeTagAdminOpts, getPayloadOpts } from '../common/methods'
 

@@ -5,7 +5,7 @@ export const BikeTagDefaults = {
   gameName: '',
   host: 'biketag.org',
   hostKey: 'ItsABikeTagGame',
-  imageSource: 'imgur',
+  tagSource: 'imgur',
   gameSource: 'sanity',
   store: 'biketag-admin',
   /// TODO: THIS IS BAD
