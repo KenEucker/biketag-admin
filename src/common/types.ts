@@ -6,7 +6,7 @@ import {
   Region,
   Setting,
   Tag,
-} from 'biketag/lib/common/schema'
+} from 'biketag/dist/common/schema'
 
 export type { Achievement, Ambassador, Game, Player, Region, Setting, Tag }
 
@@ -100,4 +100,13 @@ export interface BikeTagGamesStoreState {
 
 export interface BikeTagAmbassadorsStoreState {
   ambassadors: Ambassador[]
+}
+
+export interface BikeTagPlayersStoreState {
+  players: Player[]
+  allPlayers: Player[]
+}
+
+export interface BikeTagTagsStoreState {
+  tags: Record<string, Tag[]>
 }

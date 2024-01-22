@@ -1,10 +1,10 @@
 import { Handler } from '@netlify/functions'
 import BikeTagClient from 'biketag'
-import { Achievement, Game, Player, Tag } from 'biketag/lib/common/schema'
-import { getSupportedGames } from '../src/common/utils'
+import { Achievement, Game, Player, Tag } from 'biketag/dist/common/schema'
 import { HttpStatusCode } from '../common/constants'
 import { getBikeTagClientOpts } from '../common/methods'
 import { BackgroundProcessResults } from '../common/types'
+import { getSupportedGames } from '../src/common/utils'
 
 export const assignAchievements = async (): Promise<BackgroundProcessResults> => {
   if (process.env.SKIP_AUTOPOST_FUNCTION) {

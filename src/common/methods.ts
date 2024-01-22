@@ -4,26 +4,26 @@ import axios from 'axios'
 import BikeTagClient from 'biketag'
 import CryptoJS from 'crypto-js'
 import * as jose from 'jose'
-import md5 from 'md5'
-import { useCookies } from 'vue3-cookies'
-import qs from 'qs'
-import { DeviceUUID } from './uuid'
 import log from 'loglevel'
+import md5 from 'md5'
+import qs from 'qs'
 import request from 'request'
+import { useCookies } from 'vue3-cookies'
 import {
-  BikeTagDefaults,
-  ErrorMessage,
-  HttpStatusCode,
-  special,
-  deca,
-  BackgroundProcessResults,
-  activeQueue,
-  DomainInfo,
-  BikeTagProfile,
   Ambassador,
+  BackgroundProcessResults,
+  BikeTagDefaults,
+  BikeTagProfile,
+  DomainInfo,
+  ErrorMessage,
   Game,
+  HttpStatusCode,
   Tag,
+  activeQueue,
+  deca,
+  special,
 } from '.'
+import { DeviceUUID } from './uuid'
 
 const ajv = new Ajv()
 

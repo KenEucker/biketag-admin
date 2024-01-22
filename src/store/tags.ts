@@ -1,36 +1,54 @@
 import { BikeTagClient } from 'biketag'
-import { getTagsPayload } from 'biketag/lib/common/payloads'
-import { Game } from 'biketag/lib/common/schema'
-import request from 'request'
-import { getBikeTagAdminOpts, getPayloadOpts } from '../common/methods'
+import { defineStore } from 'pinia'
+import { BikeTagDefaults, BikeTagTagsStoreState, Game, Tag } from '../common'
 
-const tagsHandler = async (event: any) => {
-  const biketagOpts = getBikeTagAdminOpts(
-    {
-      ...event,
-      method: event.httpMethod,
-    } as unknown as request.Request,
-    true,
-  )
-  const biketag = new BikeTagClient(biketagOpts)
-  const game = (await biketag.game(biketagOpts.game, {
-    source: 'sanity',
-    concise: true,
-  })) as unknown as Game
-  const biketagPayload = getPayloadOpts(event, {
-    imgur: {
-      hash: game.mainhash,
+export const useBikeTagTagsStore = defineStore(`${BikeTagDefaults.store}::tags`, {
+  state: (): BikeTagTagsStoreState => ({
+    tags: [] as unknown as Record<string, Tag[]>,
+  }),
+
+  actions: {
+    async fetchTags(biketagClient: BikeTagClient, cached = true) {
+      const game = (await biketagClient.game()) as Game
+      return biketagClient
+        .getTags(
+          { game: game.name },
+          {
+            source: BikeTagDefaults.tagSource,
+            cached,
+          },
+        )
+        .then((d) => {
+          if (d.success) {
+            this.tags[game.name] = d.data as unknown as Tag[]
+          }
+          return this.tags
+        })
     },
-    game: biketagOpts.game,
-  })
-  const tagsResponse = await biketag.getTags(biketagPayload as getTagsPayload, {
-    source: 'imgur',
-  })
-  const { success, data } = tagsResponse
-  return {
-    statusCode: tagsResponse.status,
-    body: JSON.stringify(success ? data : tagsResponse),
-  }
-}
+    async fetchTagsForGame(biketagClient: BikeTagClient, game: string, cached = true) {
+      return biketagClient
+        .getTags(
+          { game },
+          {
+            source: BikeTagDefaults.tagSource,
+            cached,
+          },
+        )
+        .then((d) => {
+          if (d.success) {
+            this.tags[game] = d.data as unknown as Tag[]
+          }
+          return this.tags
+        })
+    },
+  },
 
-export { tagsHandler as handler }
+  getters: {
+    getTag: (state) => async (game: string, tagnumber: number) => {
+      return (state.tags[game] ?? []).find((t) => t.tagnumber === tagnumber)
+    },
+    getTags: (state) => async (game: string) => {
+      return state.tags[game] ?? []
+    },
+  },
+})

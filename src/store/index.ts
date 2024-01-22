@@ -1,5 +1,5 @@
 import BikeTagClient from 'biketag'
-import { Achievement, Game, Player, Tag } from 'biketag/lib/common/schema'
+import { Achievement, Game, Player, Tag } from 'biketag/dist/common/schema'
 import { defineStore } from 'pinia'
 import {
   BikeTagAdminStoreState,
@@ -14,6 +14,8 @@ import {
 
 import { useBikeTagAmbassadorsStore } from './ambassadors'
 import { useBikeTagGamesStore } from './games'
+import { useBikeTagPlayersStore } from './players'
+import { useBikeTagTagsStore } from './tags'
 
 let client: BikeTagClient
 let gameName: string
@@ -61,6 +63,14 @@ export const useBikeTagAdminStore = defineStore(BikeTagDefaults.store, {
       const ambassadorsStore = useBikeTagAmbassadorsStore()
       return ambassadorsStore.fetchAmbassadors(client)
     },
+    fetchPlayers() {
+      const playersStore = useBikeTagPlayersStore()
+      return playersStore.fetchPlayers(client)
+    },
+    fetchTags(game: string) {
+      const tagsStore = useBikeTagTagsStore()
+      return tagsStore.fetchTagsForGame(client, game)
+    },
     setGameContext(game: string) {
       const gamesStore = useBikeTagGamesStore()
       return gamesStore.setGameContext(game)
@@ -72,13 +82,37 @@ export const useBikeTagAdminStore = defineStore(BikeTagDefaults.store, {
       const gamesStore = useBikeTagGamesStore()
       return gamesStore.getThisGame
     },
-    getGame: (state) => (gameName?: string) => {
+    getGame: (state) => (game?: string) => {
       const gamesStore = useBikeTagGamesStore()
-      return gamesStore.getGame(gameName)
+      return gamesStore.getGame(game)
     },
     getGames: (state) => {
       const gamesStore = useBikeTagGamesStore()
       return gamesStore.getGames
+    },
+    getTag: (state) => (game: string, tagnumber: number) => {
+      const tagsStore = useBikeTagTagsStore()
+      return tagsStore.getTag(game, tagnumber)
+    },
+    getTags: (state) => (game: string) => {
+      const tagsStore = useBikeTagTagsStore()
+      return tagsStore.getTags(game)
+    },
+    getPlayer: (state) => (player: string) => {
+      const playersStore = useBikeTagPlayersStore()
+      return playersStore.getPlayer(player)
+    },
+    getPlayers: (state) => () => {
+      const playersStore = useBikeTagPlayersStore()
+      return playersStore.getPlayers
+    },
+    playersGames: (state) => (player: string) => {
+      const playersStore = useBikeTagPlayersStore()
+      return playersStore.playersGames(player)
+    },
+    gamesPlayers: (state) => (game: string) => {
+      const playersStore = useBikeTagPlayersStore()
+      return playersStore.gamesPlayers(game)
     },
     getAmbassador: (state) => (ambassadorNameOrEmail: string) => {
       const ambassadorsStore = useBikeTagAmbassadorsStore()

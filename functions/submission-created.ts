@@ -1,13 +1,8 @@
 import { BikeTagClient } from 'biketag'
-import { Ambassador, Game, Tag } from 'biketag/lib/common/schema'
+import { Ambassador, Game, Tag } from 'biketag/dist/common/schema'
 import request from 'request'
-import { getBikeTagAdminOpts, HttpStatusCode, stringifyNumber } from '../src/common'
-import {
-  defaultLogo,
-  getEncodedExpiry,
-  getSanityImageUrl,
-  sendEmailsToAmbassadors,
-} from './common'
+import { HttpStatusCode, getBikeTagAdminOpts, stringifyNumber } from '../src/common'
+import { defaultLogo, getEncodedExpiry, getSanityImageUrl, sendEmailsToAmbassadors } from './common'
 
 export const handler = async (event) => {
   const body = JSON.parse(event.body)

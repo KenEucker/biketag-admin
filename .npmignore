@@ -34,6 +34,9 @@ tsconfig-server.json
 tsconfig.json
 tsconfig.node.json
 vite.config.ts
+jsdoc.json
+vuepress.config.ts
+vuepress.client.ts
 publish.config.ts
 postcss.config.json
 postcss.config.js

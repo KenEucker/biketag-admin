@@ -1,5 +1,5 @@
 import BikeTagClient from 'biketag'
-import { Game } from 'biketag/lib/common/schema'
+import { Game } from 'biketag/dist/common/schema'
 import { HttpStatusCode } from '../common/constants'
 import {
   archiveAndClearQueue,

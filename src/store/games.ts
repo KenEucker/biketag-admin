@@ -1,6 +1,6 @@
-import { BikeTagGamesStoreState, BikeTagDefaults, Game } from '../common'
-import { defineStore } from 'pinia'
 import { BikeTagClient } from 'biketag'
+import { defineStore } from 'pinia'
+import { BikeTagDefaults, BikeTagGamesStoreState, Game } from '../common'
 
 export const useBikeTagGamesStore = defineStore(`${BikeTagDefaults.store}::games`, {
   state: (): BikeTagGamesStoreState => ({
@@ -45,7 +45,7 @@ export const useBikeTagGamesStore = defineStore(`${BikeTagDefaults.store}::games
       return state.gameContext
     },
     getGame: (state) => (gameName?: string) => {
-      return state.games.find((game) => game.name === gameName ?? state.gameContextName)
+      return state.games.find((game) => game.name === (gameName ?? state.gameContextName))
     },
   },
 })
